@@ -167,7 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 214006569}
   forwardForce: 2000
-  sidewaysForce: 100
+  sidewaysForce: 50
 --- !u!65 &214006565
 BoxCollider:
   m_ObjectHideFlags: 0
