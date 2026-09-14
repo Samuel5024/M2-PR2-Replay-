@@ -8,6 +8,19 @@ public class InputHandler : MonoBehaviour
     private PlayerMovement _playermovement;
     private Command _buttonLeft, _buttonRight;
 
+    private void OnEnable()
+    {
+        EventBus.Subscribe(EventType.RECORD, Record);
+        EventBus.Subscribe(EventType.REPLAY, Replay);
+        _invoker.Record();
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Unsubscribe(EventType.RECORD, Record);
+        EventBus.Unsubscribe(EventType.REPLAY, Replay);
+    }
+
     void Start()
     {
         _invoker = gameObject.AddComponent<Invoker>();
@@ -31,30 +44,44 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    void OnGUI()
+    public void Record()
     {
-        if(GUILayout.Button("Start Recording"))
-        {
-            _playermovement.ResetPosition();
-            _isReplaying = false;
-            _isRecording = true;
-            _invoker.Record();
-        }
-        if(GUILayout.Button("Stop Recording"))
-        {
-            _playermovement.ResetPosition();
-            _isRecording = false;
-        }
-        if(!_isRecording)
-        {
-            if (GUILayout.Button("Start Replay"))
-            {
-                _playermovement.ResetPosition();
-                _isRecording = false;
-                _isReplaying = true;
-                _invoker.Replay();
-            }
-        }
-
+        _isRecording = true;
+        _isReplaying = false;
+        _invoker.Record();
     }
+
+    public void Replay()
+    {
+        _isRecording = false;
+        _isReplaying = true;
+        _invoker.Replay();
+    }
+
+    //void OnGUI()
+    //{
+    //    if(GUILayout.Button("Start Recording"))
+    //    {
+    //        _playermovement.ResetPosition();
+    //        _isReplaying = false;
+    //        _isRecording = true;
+    //        _invoker.Record();
+    //    }
+    //    if(GUILayout.Button("Stop Recording"))
+    //    {
+    //        _playermovement.ResetPosition();
+    //        _isRecording = false;
+    //    }
+    //    if(!_isRecording)
+    //    {
+    //        if (GUILayout.Button("Start Replay"))
+    //        {
+    //            _playermovement.ResetPosition();
+    //            _isRecording = false;
+    //            _isReplaying = true;
+    //            _invoker.Replay();
+    //        }
+    //    }
+
+    //}
 }

@@ -5,6 +5,24 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody rb; //reference to the Player's rigidbody coomponent
     public float forwardForce = 2000f;
     public float sidewaysForce = 500f;
+    private Vector3 startingLocation;
+    private Quaternion startingRotation;
+
+    private void OnEnable()
+    {
+        EventBus.Subscribe(EventType.RECORD, Record);
+        EventBus.Subscribe(EventType.REPLAY, Replay);
+
+        startingLocation = transform.position;
+        startingRotation = transform.rotation;
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Unsubscribe(EventType.RECORD, Record);
+        EventBus.Unsubscribe(EventType.REPLAY, Replay);
+    }
+
     void FixedUpdate() //use fixed update for physics stuff
     {
         rb.AddForce(0, 0, forwardForce * Time.deltaTime); //Time.deltaTime is the amount of time since computer drew the last frame
@@ -38,5 +56,21 @@ public class PlayerMovement : MonoBehaviour
     public void ResetPosition()
     {
         transform.position = new Vector3(0.0f, 1.0f, 0.0f);
+    }
+
+    public void Record()
+    {
+        transform.position = startingLocation;
+        transform.rotation = startingRotation;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+    }
+
+    public void Replay()
+    {
+        transform.position = startingLocation;
+        transform.rotation = startingRotation;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 }

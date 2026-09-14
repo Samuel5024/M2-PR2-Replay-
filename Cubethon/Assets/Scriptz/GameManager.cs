@@ -5,13 +5,15 @@ public class GameManager : MonoBehaviour
 {
     bool gameHasEnded = false;
     public float restartDelay = 1f;
-
-    public PlayerMovement _playermovement;
-    //public GameObject completeLevelUI;
-    //public void CompleteLevel()
-    //{
-    //    completeLevelUI.SetActive(true);
-    //}
+    public GameObject completeLevelUI;
+    public bool record = false;
+    public bool replay = false;
+    
+    
+    public void CompleteLevel()
+    {
+        completeLevelUI.SetActive(true);
+    }
     public void EndGame()
     {
         if (gameHasEnded == false)
@@ -23,9 +25,22 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void Record()
+    {
+        gameHasEnded = false;
+        record = true;
+        replay = false;
+    }
+
+    public void Replay()
+    {
+        gameHasEnded = false;
+        record = false;
+        replay = true;
+    }
+
     void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); //loads the name of whatever scene is active
-        //_playermovement.ResetPosition();
     }
 }
