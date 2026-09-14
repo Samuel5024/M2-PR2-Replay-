@@ -12,12 +12,15 @@ public class Invoker : MonoBehaviour
 
     public void ExecuteCommand(Command command)
     {
+        command.Execute();
+
         if(_isRecording)
         {
             _recordedCommands.Add(_recordingTime, command);
-            Debug.Log("Recorded Time: " + _recordingTime);
-            Debug.Log("Recorded Command: " + command);
         }
+
+        Debug.Log("Recorded Time: " + _recordingTime);
+        Debug.Log("Recorded Command: " + command);
     }
 
     public void Record()
@@ -31,7 +34,7 @@ public class Invoker : MonoBehaviour
         _replayTime = 0.0f;
         _isReplaying = true;
 
-        if(_recordedCommands.Count < 0)
+        if(_recordedCommands.Count <= 0)
         {
             Debug.LogError("No commands to replay!");
         }
@@ -43,7 +46,7 @@ public class Invoker : MonoBehaviour
     {
         if(_isRecording)
         {
-            _recordingTime += Time.deltaTime;
+            _recordingTime += Time.fixedDeltaTime;
         }
 
         if(_isReplaying)
