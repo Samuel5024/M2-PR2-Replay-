@@ -8,12 +8,24 @@ public class GameManager : MonoBehaviour
     public GameObject completeLevelUI;
     public bool record = false;
     public bool replay = false;
-    
+
+    private void OnEnable()
+    {
+        EventBus.Subscribe(EventType.REPLAY, Replay);
+        EventBus.Subscribe(EventType.RECORD, Record);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Unsubscribe(EventType.RECORD, Record);
+        EventBus.Unsubscribe(EventType.REPLAY, Replay);
+    }
     
     public void CompleteLevel()
     {
-        completeLevelUI.SetActive(true);
+       completeLevelUI.SetActive(true);
     }
+
     public void EndGame()
     {
         if (gameHasEnded == false)
