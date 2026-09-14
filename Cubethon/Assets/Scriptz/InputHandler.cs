@@ -3,8 +3,8 @@ using UnityEngine;
 public class InputHandler : MonoBehaviour
 {
     private Invoker _invoker;
-    private bool _isReplaying;
-    private bool _isRecording;
+    private bool _isReplaying = false;
+    private bool _isRecording = true;
     private PlayerMovement _playermovement;
     private Command _buttonLeft, _buttonRight;
 
@@ -12,6 +12,12 @@ public class InputHandler : MonoBehaviour
     {
         EventBus.Subscribe(EventType.RECORD, Record);
         EventBus.Subscribe(EventType.REPLAY, Replay);
+        _invoker = gameObject.AddComponent<Invoker>();
+        _playermovement = FindObjectOfType<PlayerMovement>();
+
+        _buttonLeft = new MoveLeft(_playermovement);
+        _buttonRight = new MoveRight(_playermovement);
+
         _invoker.Record();
     }
 
@@ -21,7 +27,7 @@ public class InputHandler : MonoBehaviour
         EventBus.Unsubscribe(EventType.REPLAY, Replay);
     }
 
-    void Start()
+    /*void Start()
     {
         _invoker = gameObject.AddComponent<Invoker>();
         _playermovement = FindObjectOfType<PlayerMovement>();
@@ -29,6 +35,7 @@ public class InputHandler : MonoBehaviour
         _buttonLeft = new MoveLeft(_playermovement);
         _buttonRight = new MoveRight(_playermovement);
     }
+    */
     void Update()
     {
         if(!_isReplaying && _isRecording)
