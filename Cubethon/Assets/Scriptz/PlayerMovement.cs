@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float sidewaysForce = 500f;
     void FixedUpdate() //use fixed update for physics stuff
     {
-        //rb.AddForce(0, 0, forwardForce * Time.deltaTime); //Time.deltaTime is the amount of time since computer drew the last frame
+        rb.AddForce(0, 0, forwardForce * Time.deltaTime); //Time.deltaTime is the amount of time since computer drew the last frame
 
         if(Input.GetKey(KeyCode.RightArrow)) //if the player is pressing the Right Arrow key
         {
