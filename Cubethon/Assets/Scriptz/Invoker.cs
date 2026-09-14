@@ -30,7 +30,7 @@ public class Invoker : MonoBehaviour
         _replayTime = 0.0f;
         _isReplaying = true;
 
-        if(_recordedCommands.Count > 0)
+        if(_recordedCommands.Count < 0)
         {
             Debug.LogError("No commands to replay!");
         }

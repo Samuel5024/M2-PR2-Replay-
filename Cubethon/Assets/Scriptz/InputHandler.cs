@@ -35,21 +35,24 @@ public class InputHandler : MonoBehaviour
     {
         if(GUILayout.Button("Start Recording"))
         {
+            _playermovement.ResetPosition();
             _isReplaying = false;
             _isRecording = true;
             _invoker.Record();
         }
         if(GUILayout.Button("Stop Recording"))
         {
+            _playermovement.ResetPosition();
             _isRecording = false;
         }
         if(!_isRecording)
         {
             if (GUILayout.Button("Start Replay"))
             {
+                _playermovement.ResetPosition();
                 _isRecording = false;
                 _isReplaying = true;
-                _invoker.Record();
+                _invoker.Replay();
             }
         }
 
