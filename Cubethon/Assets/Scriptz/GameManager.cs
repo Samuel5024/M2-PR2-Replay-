@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 {
     bool gameHasEnded = false;
     public float restartDelay = 1f;
+
+    public PlayerMovement _playermovement;
     //public GameObject completeLevelUI;
     //public void CompleteLevel()
     //{
@@ -24,5 +26,6 @@ public class GameManager : MonoBehaviour
     void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); //loads the name of whatever scene is active
+        //_playermovement.ResetPosition();
     }
 }

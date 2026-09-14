@@ -20,11 +20,11 @@ public class InputHandler : MonoBehaviour
     {
         if(!_isReplaying && _isRecording)
         {
-            if(Input.GetKeyDown(KeyCode.LeftArrow))
+            if(Input.GetKeyUp(KeyCode.LeftArrow))
             {
                 _invoker.ExecuteCommand(_buttonLeft);
             }
-            if(Input.GetKeyDown(KeyCode.RightArrow))
+            if(Input.GetKeyUp(KeyCode.RightArrow))
             {
                 _invoker.ExecuteCommand(_buttonRight);
             }

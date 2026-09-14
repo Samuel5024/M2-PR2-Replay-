@@ -611,6 +611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restartDelay: 1
+  _playermovement: {fileID: 214006564}
 --- !u!4 &1532106563
 Transform:
   m_ObjectHideFlags: 0
