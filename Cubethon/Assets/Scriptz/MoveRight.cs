@@ -11,6 +11,6 @@ public class MoveRight : Command
 
     public override void Execute()
     {
-
+        _playermovement.MoveRight();
     }
 }

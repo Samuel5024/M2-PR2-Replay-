@@ -9,19 +9,29 @@ void FixedUpdate() //use fixed update for physics stuff
     {
         rb.AddForce(0, 0, forwardForce * Time.deltaTime); //Time.deltaTime is the amount of time since computer drew the last frame
 
-        if(Input.GetKey("d")) //if the player is pressing the "D" key
+        if(Input.GetKey(KeyCode.RightArrow)) //if the player is pressing the Right Arrow key
         {
-            rb.AddForce(sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange); //add a force to the right
+            MoveRight();
         }
 
-        if(Input.GetKey("a")) //if the player is pressing the "A" key 
+        if(Input.GetKey(KeyCode.LeftArrow)) //if the player is pressing the Left Arrow key 
         {
-            rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange); //add a force to the left (inverse (-) sidewaysForce)
+            MoveLeft();
         }
 
         if(rb.position.y < -1f)
         {
             FindObjectOfType<GameManager>().EndGame();
         }
+    }
+
+    public void MoveRight()
+    {
+        rb.AddForce(sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange); //add a force to the right
+    }
+
+    public void MoveLeft()
+    {
+        rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange); //add a force to the left (inverse (-) sidewaysForce)
     }
 }
