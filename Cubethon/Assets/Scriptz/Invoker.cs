@@ -16,7 +16,12 @@ public class Invoker : MonoBehaviour
 
         if(_isRecording)
         {
-            _recordedCommands.Add(_recordingTime, command);
+            if (_recordedCommands.ContainsKey(_recordingTime)){
+                 _recordedCommands[_recordingTime] = command; 
+            }
+            else{
+                _recordedCommands.Add(_recordingTime, command);
+            }
         }
 
         Debug.Log("Recorded Time: " + _recordingTime);
